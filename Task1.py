@@ -1,6 +1,22 @@
 from bs4 import BeautifulSoup as bs
 import requests
 
+def addingSing(text):
+    splittedText = text.split()
+    newListText = []
+
+    for i in splittedText:
+        if len(i) == 6:
+            i+= '™'
+
+        newListText.append(i)
+
+    textWithSign = ' '.join(newListText)
+    #print(textWithSign)
+
+    return  textWithSign
+
+
 def parseFromWebsite(link):
     response = requests.get(link)
     soup = bs(response.text, 'html.parser')
@@ -23,9 +39,8 @@ def parseFromWebsite(link):
 def main():
     link_address = 'https://news.ycombinator.com/item?id=13713480'
     textFromLink = parseFromWebsite(link_address)
-    print(textFromLink)
 
-
+    print(addingSing(textFromLink))
 
 
 if __name__ == '__main__':
